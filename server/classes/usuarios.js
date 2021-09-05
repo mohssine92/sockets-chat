@@ -11,10 +11,10 @@ class Usuarios {
         this.personas = []; // inicializar arreglo de personas que estan conectadas al chat 
     }
 
-    agregarPersona( id, nombre /* , sala */ ) {
+    agregarPersona( id, nombre, sala ) {
       /* agragar una persona al chat  */
 
-        let persona = { id, nombre /* , sala */ }; // crear object de persona
+        let persona = { id, nombre , sala }; // crear object de persona
 
         this.personas.push(persona); // agregar object persona al arreglo de persona conectdas al chat
 
@@ -31,19 +31,18 @@ class Usuarios {
         let persona = this.personas.filter( persona => persona.id === id )[0]; // un = es asignacion , === es comparacion
 
         return persona;
-    }
+    } // esta instruccion regresa todos los que estan conectados al chat global por defect de configuracion de socket server
 
     getPersonas() { // obtener todas personas conectados al chat 
         return this.personas;
     }
 
     getPersonasPorSala(sala) {
-        /* recibo la sala del chat que me interesa 
-         *
-         */
-        //let personasEnSala = this.personas.filter(persona => persona.sala === sala);
-        //return personasEnSala;
-    }
+        
+      let personasEnSala = this.personas.filter(persona => persona.sala === sala);
+      return personasEnSala;
+
+    } // esta instruccion me regresa solo los que estan unidos , conectados a una sala de chat 
 
     borrarPersona(id) {
      /* eliminar Object persona de mi arreglo de personas conectadas al chat : suponiendo que dicho user se desconecta del chat cualquier razon que una persona abandona el chat   
@@ -53,7 +52,7 @@ class Usuarios {
 
       let personaBorrada = this.getPersona(id);  // tengo objecto de persona la que voy a borrar  
 
-      this.personas = this.personas.filter(persona => persona.id != id); // actualizacion del arreglo excluyendo persona queremos borrar - Objetos-arrays trabajan por refrencia 
+      this.personas = this.personas.filter(persona => persona.id != id); // regresa arreglo de persona que cumplan la condicion , asi la del id sera ignorada en el nuevo array
 
       return personaBorrada;  // esto me sirve para decir que persona desconectada - abandono chat - se fue
 
