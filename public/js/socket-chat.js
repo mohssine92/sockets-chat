@@ -26,6 +26,7 @@ socket.on('connect', function() {
  //decir al servidor de socket quien soy yo -custom event - payload - callback : respuesta del servidor : atrave de la ejecuccion de callback:funcion
  socket.emit('entrarChat', usuario , (resp) => {
    console.log('Usuarios conectados ', resp )
+   renderizarUsuarios(resp);
    
  })
 
@@ -53,6 +54,8 @@ socket.on('disconnect', function() {
 socket.on('crearMensaje',(mensaje) => { 
  
   console.log('Servidor:', mensaje);
+  renderizarMensajes(mensaje, false);
+  scrollBottom();
 
 });
 
@@ -61,6 +64,7 @@ socket.on('crearMensaje',(mensaje) => {
 socket.on('listaPersonas',(personas) => {   
  
   console.log(personas);
+  renderizarUsuarios(personas);
 
 });
 

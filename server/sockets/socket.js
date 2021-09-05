@@ -46,11 +46,12 @@ io.on('connection', (client) => {
     // en este caso el cliente conectado a chat de otra sala no le interesa obtener notificaciones de otro cliente conectado a otra sala - le interesa notificarse solo de los clientes 
     // que han sido unido a la misma sala de chat 
     client.broadcast.to(data.sala).emit('listaPersonas', usuarios.getPersonasPorSala(data.sala));
- 
+    client.broadcast.to(data.sala).emit('crearMensaje', crearMensaje('Administrador', `${ data.nombre } se unió`));
+    
     // recordar este callback sera emitido al cliente en especifico quien lanzo el evento - no todos clientes conectados el servidor socket
     //callback(personas) regresa todos personas conectados globlamente 
 
-     callback(usuarios.getPersonasPorSala(data.sala)); // regreso solo las personas conectados a la sala donde estoy cenectado
+     callback(usuarios.getPersonasPorSala(data.sala)); // regreso so lo las personas conectados a la sala donde estoy cenectado
     
  
    }) 
@@ -67,7 +68,7 @@ io.on('connection', (client) => {
 
 
       
-     // callback(mensaje);
+      callback(mensaje);
 
    });
 
